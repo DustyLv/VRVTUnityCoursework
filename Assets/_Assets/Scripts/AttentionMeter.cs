@@ -7,14 +7,31 @@ public class AttentionMeter : MonoBehaviour
     public float m_AttentionIncreasePerSource = 0.1f;
     public float m_AttentionDecrease = 0.2f;
     [SerializeField] private List<AttentionSource> _attentionSources = new List<AttentionSource>();
-    [SerializeField] private float _currentAttention = 0f;
+    private float _currentAttention = 0f;
+    public float CurrentAttention
+    {
+        get
+        {
+            return _currentAttention;
+        }
+    }
 
+
+    private float _maxAttentionValue = 100f;
+    public float MaxAttentionValue
+    {
+
+        get
+        {
+            return _maxAttentionValue;
+        }
+
+    }
 
 
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -28,8 +45,15 @@ public class AttentionMeter : MonoBehaviour
         {
             _currentAttention -= m_AttentionDecrease * Time.deltaTime;
         }
-        _currentAttention = Mathf.Clamp(_currentAttention, 0f, 100f);
+        _currentAttention = Mathf.Clamp(_currentAttention, 0f, _maxAttentionValue);
+
+        UIController.Instance.UpdateAttentionSlider(_currentAttention / _maxAttentionValue);
     }
+
+    //IEnumerator UpdateAttentionMeter()
+    //{
+
+    //}
 
     public void AddAttentionSource(AttentionSource _source)
     {

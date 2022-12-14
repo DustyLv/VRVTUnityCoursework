@@ -15,10 +15,12 @@ public class PlayerFPC : MonoBehaviour
     Vector3 moveDirection = Vector3.zero;
     Vector2 rotation = Vector2.zero;
 
+    private AttentionSource _attentionSource;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        _attentionSource = gameObject.GetComponent<AttentionSource>();
         characterController = GetComponent<CharacterController>();
         rotation.y = transform.eulerAngles.y;
 
@@ -46,6 +48,7 @@ public class PlayerFPC : MonoBehaviour
             if (Input.GetButton("Jump"))
             {
                 moveDirection.y = jumpSpeed;
+                _attentionSource.ActivateSource();
             }
         }
 

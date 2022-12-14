@@ -44,7 +44,13 @@ public class UIController : MonoBehaviour
         _currentCrosshairActiveState = _state;
     }
 
-    public void UpdateAttentionSliderColor(float _value)
+    public void UpdateAttentionSlider(float _value)
+    {
+        m_AttentionSlider.value = _value;
+        UpdateAttentionSliderColor(_value);
+    }
+
+    private void UpdateAttentionSliderColor(float _value)
     {
         m_AttentionSliderFillImage.color = m_AttentionGradient.Evaluate(_value);
     }
