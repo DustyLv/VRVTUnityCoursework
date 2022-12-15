@@ -11,12 +11,14 @@ public class CitizenController : MonoBehaviour
     [SerializeField] private Transform _citizenLookAtTarget;
 
     private AttentionMeter _attentionMeter;
+    private int _spawnedCitizenCount = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         _attentionMeter = FindObjectOfType<AttentionMeter>();
-        StartCoroutine(TimedSpawn());
+        GameManager.Instance.OnGameEnd += StopSpawning;
+        StartCoroutine("TimedSpawn");
     }
 
     // Update is called once per frame
@@ -29,10 +31,15 @@ public class CitizenController : MonoBehaviour
     {
         SpawnCitizen();
         float a = 1f - (_attentionMeter.CurrentAttention / _attentionMeter.MaxAttentionValue) + 0.2f;
-        print(Time.time);
-        yield return new WaitForSeconds(15 * a);
+        //print(Time.time);
+        yield return new WaitForSeconds(10 * a);
         
-        StartCoroutine(TimedSpawn());
+        StartCoroutine("TimedSpawn");
+    }
+
+    private void StopSpawning()
+    {
+        StopCoroutine("TimedSpawn");
     }
 
     public void SpawnCitizen()
@@ -42,6 +49,7 @@ public class CitizenController : MonoBehaviour
         Citizen citizenBase = Instantiate(_citizenBasePrefab, GetRandomSpawnPoint().position, Quaternion.identity);
         GameObject citizenCharacterModel = Instantiate(_citizenCharacterModelPrefabs[randValue], citizenBase.transform.position, Quaternion.identity, citizenBase.gameObject.transform);
         citizenBase.SetCitizenVariables(GetCitizenGoalPosition(), _citizenLookAtTarget);
+        _spawnedCitizenCount += 1;
     }
 
     private Transform GetRandomSpawnPoint()

@@ -48,7 +48,7 @@ public class PlayerFPC : MonoBehaviour
             if (Input.GetButton("Jump"))
             {
                 moveDirection.y = jumpSpeed;
-                _attentionSource.ActivateSource();
+                _attentionSource.TryActivateSource();
             }
         }
 

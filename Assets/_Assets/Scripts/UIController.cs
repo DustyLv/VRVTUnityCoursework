@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ public class UIController : MonoBehaviour
     public Gradient m_AttentionGradient;
 
     public Slider m_TemperatureSlider;
+    private Image m_TemperatureSliderFillImage;
     public Gradient m_TemperatureGradient;
 
 
@@ -25,9 +27,13 @@ public class UIController : MonoBehaviour
     {
         Instance = this;
     }
+
     private void Start()
     {
         m_AttentionSliderFillImage = m_AttentionSlider.fillRect.gameObject.GetComponent<Image>();
+        m_TemperatureSliderFillImage = m_TemperatureSlider.fillRect.gameObject.GetComponent<Image>();
+
+        GameManager.Instance.OnGameEnd += CrosshairDisable;
     }
 
     // Update is called once per frame
@@ -36,22 +42,41 @@ public class UIController : MonoBehaviour
 
     }
 
-    public void CrosshairPOIActivate(bool _state)
+    public void CrosshairEnable()
     {
-        if (_currentCrosshairActiveState == _state) return;
-        m_CrosshairImage.rectTransform.localScale = _state ? Vector3.one * 1.5f : Vector3.one * 1f;
-        m_CrosshairImage.color = _state ? m_Crosshair_ActiveColor : m_Crosshair_NormalColor;
-        _currentCrosshairActiveState = _state;
+        if(_currentCrosshairActiveState) { return; }
+        m_CrosshairImage.rectTransform.localScale = Vector3.one * 1.5f;
+        m_CrosshairImage.color = m_Crosshair_ActiveColor;
+        _currentCrosshairActiveState = true;
+    }
+
+    public void CrosshairDisable()
+    {
+        if (!_currentCrosshairActiveState) { return; }
+        m_CrosshairImage.rectTransform.localScale = Vector3.one * 1f;
+        m_CrosshairImage.color = m_Crosshair_NormalColor;
+        _currentCrosshairActiveState = false;
     }
 
     public void UpdateAttentionSlider(float _value)
     {
-        m_AttentionSlider.value = _value;
-        UpdateAttentionSliderColor(_value);
+        UpdateSliderValue(m_AttentionSlider, _value);
+        UpdateSliderColor(m_AttentionSliderFillImage, m_AttentionGradient, _value);
+    }
+    public void UpdateTemperatureSlider(float _value)
+    {
+        UpdateSliderValue(m_TemperatureSlider, _value);
+        UpdateSliderColor(m_TemperatureSliderFillImage, m_TemperatureGradient, _value);
     }
 
-    private void UpdateAttentionSliderColor(float _value)
+
+    private void UpdateSliderValue(Slider _slider, float _value)
     {
-        m_AttentionSliderFillImage.color = m_AttentionGradient.Evaluate(_value);
+        _slider.value = _value;
+    }
+
+    private void UpdateSliderColor(Image _sliderImage, Gradient _gradient, float _value)
+    {
+        _sliderImage.color = _gradient.Evaluate(_value);
     }
 }

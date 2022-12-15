@@ -10,7 +10,7 @@ public class AttentionSeeker : MonoBehaviour
 
     [SerializeField] private PlayerAnimator _playerAnimator;
 
-    private RaycastHit hit;
+    private GameObject m_HitObject;
 
     // Start is called before the first frame update
     void Start()
@@ -21,16 +21,23 @@ public class AttentionSeeker : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        // Does the ray intersect any objects excluding the player layer
+        if (!GameManager.Instance.GameRunning) { return; }
+
+        RaycastHit hit;
         if (Physics.Raycast(m_RaycastSourcePosition.position, m_RaycastSourcePosition.TransformDirection(Vector3.forward), out hit, m_ActivationDistance, m_LayerMask))
         {
-            UIController.Instance.CrosshairPOIActivate(true);
-            
+            UIController.Instance.CrosshairEnable();
+
+            if (m_HitObject != hit.collider.gameObject)
+            {
+                m_HitObject = hit.collider.gameObject;
+            }
 
         }
         else
         {
-            UIController.Instance.CrosshairPOIActivate(false);
+            if(m_HitObject != null) { m_HitObject = null; }
+            UIController.Instance.CrosshairDisable();
         }
 
 
@@ -38,14 +45,16 @@ public class AttentionSeeker : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.Instance.GameRunning) { return; }
+
         if (Input.GetMouseButtonDown(0))
         {
-            
-            if (hit.transform == null) return;
-            if (hit.transform.gameObject.TryGetComponent(out AttentionSource source))
+
+            if (m_HitObject == null) return;
+            if (m_HitObject.TryGetComponent(out AttentionSource source))
             {
-                print("Mouse clicked");
-                source.ActivateSource();
+                //print("Mouse clicked");
+                source.TryActivateSource();
                 //_playerAnimator.TriggerActionAnimation();
             }
         }

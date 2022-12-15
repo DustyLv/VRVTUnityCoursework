@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class AttentionMeter : MonoBehaviour
 {
-    public float m_AttentionIncreasePerSource = 0.1f;
+    //public float m_AttentionIncreasePerSource = 0.1f;
+    public float m_AttentionIncreaseValue = 0f;
     public float m_AttentionDecrease = 0.2f;
     [SerializeField] private List<AttentionSource> _attentionSources = new List<AttentionSource>();
     private float _currentAttention = 0f;
@@ -37,15 +38,24 @@ public class AttentionMeter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_attentionSources.Count > 0)
+        if (!GameManager.Instance.GameRunning) { return; }
+
+        if (m_AttentionIncreaseValue > 0)
         {
-            _currentAttention += (m_AttentionIncreasePerSource * _attentionSources.Count) * Time.deltaTime;
+            //_currentAttention += (m_AttentionIncreasePerSource * _attentionSources.Count) * Time.deltaTime;
+            _currentAttention += m_AttentionIncreaseValue * Time.deltaTime;
         }
         else
         {
             _currentAttention -= m_AttentionDecrease * Time.deltaTime;
         }
+
         _currentAttention = Mathf.Clamp(_currentAttention, 0f, _maxAttentionValue);
+
+        if (_currentAttention >= _maxAttentionValue)
+        {
+            GameManager.Instance.GameEnd(GameEndType.Saved);
+        }
 
         UIController.Instance.UpdateAttentionSlider(_currentAttention / _maxAttentionValue);
     }
@@ -55,19 +65,25 @@ public class AttentionMeter : MonoBehaviour
 
     //}
 
-    public void AddAttentionSource(AttentionSource _source)
+    public void AddAttentionSource(AttentionSource _source, float _addAttentionValue)
     {
-        if (!_attentionSources.Contains(_source))
-        {
-            _attentionSources.Add(_source);
-        }
+        m_AttentionIncreaseValue += _addAttentionValue;
+
+        //if (!_attentionSources.Contains(_source))
+        //{
+        //    _attentionSources.Add(_source);
+        //    m_AttentionIncreaseValue += _addAttentionValue;
+        //}
     }
 
-    public void RemoveAttentionSource(AttentionSource _source)
+    public void RemoveAttentionSource(AttentionSource _source, float _addAttentionValue)
     {
-        if (_attentionSources.Contains(_source))
-        {
-            _attentionSources.Remove(_source);
-        }
+        m_AttentionIncreaseValue -= _addAttentionValue;
+
+        //if (_attentionSources.Contains(_source))
+        //{
+        //    _attentionSources.Remove(_source);
+        //    m_AttentionIncreaseValue -= _addAttentionValue;
+        //}
     }
 }
