@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIController : MonoBehaviour
 {
@@ -12,13 +13,19 @@ public class UIController : MonoBehaviour
     private bool _currentCrosshairActiveState = false;
 
     public Slider m_AttentionSlider;
-    private Image m_AttentionSliderFillImage;
+    private Image _attentionSliderFillImage;
     public Gradient m_AttentionGradient;
 
     public Slider m_TemperatureSlider;
-    private Image m_TemperatureSliderFillImage;
+    private Image _temperatureSliderFillImage;
     public Gradient m_TemperatureGradient;
 
+    public GameObject m_GameEndScreen;
+    public GameObject m_Dog_Win;
+    public GameObject m_Dog_Lose;
+    public TextMeshProUGUI m_GameEndScreenTitle;
+    [TextArea] public string m_WinText = "You survived!!! This time....";
+    [TextArea] public string m_LoseText = "Congratulations! You are a dehydrated sausage!";
 
     public static UIController Instance;
 
@@ -30,8 +37,10 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
-        m_AttentionSliderFillImage = m_AttentionSlider.fillRect.gameObject.GetComponent<Image>();
-        m_TemperatureSliderFillImage = m_TemperatureSlider.fillRect.gameObject.GetComponent<Image>();
+        _attentionSliderFillImage = m_AttentionSlider.fillRect.gameObject.GetComponent<Image>();
+        _temperatureSliderFillImage = m_TemperatureSlider.fillRect.gameObject.GetComponent<Image>();
+
+        SetUpEndScreen();
 
         GameManager.Instance.OnGameEnd += CrosshairDisable;
     }
@@ -44,7 +53,7 @@ public class UIController : MonoBehaviour
 
     public void CrosshairEnable()
     {
-        if(_currentCrosshairActiveState) { return; }
+        if (_currentCrosshairActiveState) { return; }
         m_CrosshairImage.rectTransform.localScale = Vector3.one * 1.5f;
         m_CrosshairImage.color = m_Crosshair_ActiveColor;
         _currentCrosshairActiveState = true;
@@ -61,12 +70,39 @@ public class UIController : MonoBehaviour
     public void UpdateAttentionSlider(float _value)
     {
         UpdateSliderValue(m_AttentionSlider, _value);
-        UpdateSliderColor(m_AttentionSliderFillImage, m_AttentionGradient, _value);
+        //UpdateSliderColor(_attentionSliderFillImage, m_AttentionGradient, _value);
     }
     public void UpdateTemperatureSlider(float _value)
     {
         UpdateSliderValue(m_TemperatureSlider, _value);
-        UpdateSliderColor(m_TemperatureSliderFillImage, m_TemperatureGradient, _value);
+        UpdateSliderColor(_temperatureSliderFillImage, m_TemperatureGradient, _value);
+    }
+
+    private void SetUpEndScreen()
+    {
+        m_Dog_Win.SetActive(false);
+        m_Dog_Lose.SetActive(false);
+        m_GameEndScreen.SetActive(false);
+    }
+
+    public void ShowEndScreen(GameEndType _gameEndType)
+    {
+        m_GameEndScreen.SetActive(true);
+
+        switch (_gameEndType)
+        {
+            case GameEndType.Saved:
+                m_GameEndScreenTitle.text = m_WinText;
+                m_Dog_Win.SetActive(true);
+                break;
+            case GameEndType.Died:
+                m_GameEndScreenTitle.text = m_LoseText;
+                m_Dog_Lose.SetActive(true);
+                break;
+            default:
+                break;
+        }
+ 
     }
 
 

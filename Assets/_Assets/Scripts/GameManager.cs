@@ -45,9 +45,11 @@ public class GameManager : MonoBehaviour
         {
             case GameEndType.Saved:
                 print("--- GAME END!   YOU GOT SAVED!!");
+                UIController.Instance.ShowEndScreen(_gameEndType);
                 break;
             case GameEndType.Died:
                 print("--- GAME END!   YOU DIED!!");
+                UIController.Instance.ShowEndScreen(_gameEndType);
                 break;
             default:
                 break;

@@ -4,9 +4,6 @@
     "m_ObjectId": "5d43ff6a708146d9a7e170ad68b94368",
     "m_Properties": [
         {
-            "m_Id": "fa295fae7af74b36888c3ef12b723bfd"
-        },
-        {
             "m_Id": "2328800e6b1f4721a93d1f313b07038c"
         },
         {
@@ -472,7 +469,7 @@
         "preventRotation": false
     },
     "m_Path": "Shader Graphs",
-    "m_GraphPrecision": 1,
+    "m_GraphPrecision": 0,
     "m_PreviewMode": 2,
     "m_OutputNode": {
         "m_Id": ""
@@ -1284,7 +1281,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.0,
+    "m_Value": 1.0,
     "m_FloatType": 1,
     "m_RangeValues": {
         "x": 0.0,
@@ -1345,9 +1342,6 @@
     "m_ObjectId": "45728133900d4a9dacc316694de13058",
     "m_Name": "",
     "m_ChildObjectList": [
-        {
-            "m_Id": "fa295fae7af74b36888c3ef12b723bfd"
-        },
         {
             "m_Id": "2328800e6b1f4721a93d1f313b07038c"
         },
@@ -1651,9 +1645,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -499.00006103515627,
-            "y": -109.00000762939453,
-            "width": 145.00003051757813,
+            "x": -439.0000305175781,
+            "y": 69.0000228881836,
+            "width": 144.99996948242188,
             "height": 129.0
         }
     },
@@ -3237,35 +3231,5 @@
         "y": 0.0
     },
     "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
-    "m_ObjectId": "fa295fae7af74b36888c3ef12b723bfd",
-    "m_Guid": {
-        "m_GuidSerialized": "ef40b476-3bd2-49c9-b2f2-0b75c160cc7c"
-    },
-    "m_Name": "Noise Texture",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Noise Texture",
-    "m_DefaultReferenceName": "_Noise_Texture",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"f782fd1eba346d441a086e35c1c1d1e9\",\"type\":3}}",
-        "m_Guid": ""
-    },
-    "isMainTexture": false,
-    "useTilingAndOffset": false,
-    "m_Modifiable": true,
-    "m_DefaultType": 0
 }
 

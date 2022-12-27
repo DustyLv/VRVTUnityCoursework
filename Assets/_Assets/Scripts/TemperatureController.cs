@@ -9,7 +9,7 @@ public class TemperatureController : MonoBehaviour
     //private Vector2 _temperatureRangeMinMax = new Vector2(25f, 50f);
     private float _temperatureMaxValue = 1f;
 
-    [SerializeField] private float _temperatureRaiseValue = 0.1f;
+    //[SerializeField] private float _temperatureRaiseValue = 0.1f;
     [SerializeField] private Material _fullscreenEffectMaterial;
 
 
@@ -20,6 +20,7 @@ public class TemperatureController : MonoBehaviour
 
         UpdateTemperature();
         GameManager.Instance.OnGameEnd += DisableTemperatureUpdate;
+        GameManager.Instance.OnGameEnd += ResetFullscreenEffect;
     }
 
     private void OnEnable()

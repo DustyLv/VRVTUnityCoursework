@@ -10,6 +10,8 @@ public class CitizenController : MonoBehaviour
     [SerializeField] private List<Transform> _goalPoints;
     [SerializeField] private Transform _citizenLookAtTarget;
 
+    [SerializeField] private int _maxSpawnedCitizens = 30;
+
     private AttentionMeter _attentionMeter;
     private int _spawnedCitizenCount = 0;
 
@@ -29,12 +31,19 @@ public class CitizenController : MonoBehaviour
 
     private IEnumerator TimedSpawn()
     {
+        if(_spawnedCitizenCount == 0)
+        {
+            yield return new WaitForSeconds(5f);
+        }
         SpawnCitizen();
-        float a = 1f - (_attentionMeter.CurrentAttention / _attentionMeter.MaxAttentionValue) + 0.2f;
+        float timeMultiplier = 1f - (_attentionMeter.CurrentAttention / _attentionMeter.MaxAttentionValue) + 0.1f;
         //print(Time.time);
-        yield return new WaitForSeconds(10 * a);
-        
-        StartCoroutine("TimedSpawn");
+        yield return new WaitForSeconds(10f * timeMultiplier);
+        if (_spawnedCitizenCount < _maxSpawnedCitizens)
+        {
+            StartCoroutine("TimedSpawn");
+        }
+
     }
 
     private void StopSpawning()

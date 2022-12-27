@@ -15,6 +15,8 @@ public class PlayerFPC : MonoBehaviour
     Vector3 moveDirection = Vector3.zero;
     Vector2 rotation = Vector2.zero;
 
+    private bool _inputActive = true;
+
     private AttentionSource _attentionSource;
 
     // Start is called before the first frame update
@@ -25,13 +27,16 @@ public class PlayerFPC : MonoBehaviour
         rotation.y = transform.eulerAngles.y;
 
         //Lock cursor
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        EnableInput();
+
+        GameManager.Instance.OnGameEnd += DisableInput;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!_inputActive) return;
+
         if (characterController.isGrounded)
         {
             // We are grounded, so recalculate move direction based on axes
@@ -68,5 +73,19 @@ public class PlayerFPC : MonoBehaviour
         playerCameraParent.localRotation = Quaternion.Euler(rotation.x, 0, 0);
         transform.eulerAngles = new Vector2(0, rotation.y);
 
+    }
+
+    private void EnableInput()
+    {
+        _inputActive = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    private void DisableInput()
+    {
+        _inputActive = false;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 }
