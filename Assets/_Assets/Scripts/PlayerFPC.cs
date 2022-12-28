@@ -18,6 +18,7 @@ public class PlayerFPC : MonoBehaviour
     private bool _inputActive = true;
 
     private AttentionSource _attentionSource;
+    [SerializeField] private SFXPlayer _sfxPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,8 @@ public class PlayerFPC : MonoBehaviour
         EnableInput();
 
         GameManager.Instance.OnGameEnd += DisableInput;
+
+
     }
 
     // Update is called once per frame
@@ -54,6 +57,7 @@ public class PlayerFPC : MonoBehaviour
             {
                 moveDirection.y = jumpSpeed;
                 _attentionSource.TryActivateSource();
+                _sfxPlayer.PlayDogSound();
             }
         }
 
