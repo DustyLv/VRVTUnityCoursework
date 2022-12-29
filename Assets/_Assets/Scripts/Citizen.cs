@@ -9,8 +9,10 @@ public class Citizen : MonoBehaviour
     private Animator _animator;
     private NavMeshAgent _navAgent;
 
-    private bool destinationReached = false;
+    private bool _destinationReached = false;
     private Transform _lookAtTargetTransform = null;
+
+    private bool _isHero = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -27,10 +29,10 @@ public class Citizen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(ReachedDestinationOrGaveUp() && !destinationReached)
+        if(ReachedDestinationOrGaveUp() && !_destinationReached)
         {
             OnDestinationReached();
-            destinationReached = true;
+            _destinationReached = true;
         }
     }
 
@@ -48,15 +50,22 @@ public class Citizen : MonoBehaviour
         _animator.SetTrigger("action" + randNumber);
     }
 
-    public void SetCitizenVariables(Vector3 _goal, Transform _lookAtTarget)
+    private void TriggerHeroAction()
+    {
+        _animator.SetTrigger("heroAction");
+    }
+
+    public void SetCitizenVariables(Vector3 goal, Transform lookAtTarget, bool isHero)
     {
         GetReferences();
 
-        _navAgent.destination = _goal;
+        _navAgent.destination = goal;
         _navAgent.avoidancePriority = Random.Range(0, 60);
         _animator.SetBool("walking", true);
 
-        _lookAtTargetTransform = _lookAtTarget;
+        _lookAtTargetTransform = lookAtTarget;
+
+        _isHero = isHero;
     }
 
     public bool ReachedDestinationOrGaveUp()

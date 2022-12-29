@@ -10,10 +10,15 @@ public class CitizenController : MonoBehaviour
     [SerializeField] private List<Transform> _goalPoints;
     [SerializeField] private Transform _citizenLookAtTarget;
 
+    [SerializeField] private Transform _spawnPoint_Hero;
+    [SerializeField] private Transform _goalPoint_Hero;
+
     [SerializeField] private int _maxSpawnedCitizens = 30;
 
     private AttentionMeter _attentionMeter;
     private int _spawnedCitizenCount = 0;
+
+    private List<Citizen> _spawnedCitizens = new List<Citizen>();
 
     // Start is called before the first frame update
     void Start()
@@ -57,8 +62,18 @@ public class CitizenController : MonoBehaviour
         
         Citizen citizenBase = Instantiate(_citizenBasePrefab, GetRandomSpawnPoint().position, Quaternion.identity);
         GameObject citizenCharacterModel = Instantiate(_citizenCharacterModelPrefabs[randValue], citizenBase.transform.position, Quaternion.identity, citizenBase.gameObject.transform);
-        citizenBase.SetCitizenVariables(GetCitizenGoalPosition(), _citizenLookAtTarget);
+        citizenBase.SetCitizenVariables(GetCitizenGoalPosition(), _citizenLookAtTarget, false);
+        _spawnedCitizens.Add(citizenBase);
         _spawnedCitizenCount += 1;
+    }
+
+    public void SpawnHeroCitizen()
+    {
+        int randValue = Random.Range(0, _citizenCharacterModelPrefabs.Count);
+
+        Citizen citizenBase = Instantiate(_citizenBasePrefab, _spawnPoint_Hero.position, Quaternion.identity);
+        GameObject citizenCharacterModel = Instantiate(_citizenCharacterModelPrefabs[randValue], citizenBase.transform.position, Quaternion.identity, citizenBase.gameObject.transform);
+        citizenBase.SetCitizenVariables(_goalPoint_Hero.position, _citizenLookAtTarget, true);
     }
 
     private Transform GetRandomSpawnPoint()

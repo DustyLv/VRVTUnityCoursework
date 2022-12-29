@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     public Action OnGameEnd;
 
+    private CutsceneController _cutsceneController;
+
     public static GameManager Instance;
 
     
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _cutsceneController = FindObjectOfType<CutsceneController>();
         GameStart();
     }
 
@@ -45,7 +48,8 @@ public class GameManager : MonoBehaviour
         {
             case GameEndType.Saved:
                 print("--- GAME END!   YOU GOT SAVED!!");
-                UIController.Instance.ShowEndScreen(_gameEndType);
+                _cutsceneController.PlayCutscene_Saved();
+                //UIController.Instance.ShowEndScreen(_gameEndType);
                 break;
             case GameEndType.Died:
                 print("--- GAME END!   YOU DIED!!");
