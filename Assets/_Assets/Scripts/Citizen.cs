@@ -50,9 +50,10 @@ public class Citizen : MonoBehaviour
         _animator.SetTrigger("action" + randNumber);
     }
 
-    private void TriggerHeroAction()
+    public void TriggerEndEmote()
     {
-        _animator.SetTrigger("heroAction");
+        int randNumber = Random.Range(1, 4);
+        _animator.SetTrigger("cheer" + randNumber);
     }
 
     public void SetCitizenVariables(Vector3 goal, Transform lookAtTarget, bool isHero)

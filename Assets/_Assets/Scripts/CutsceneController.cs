@@ -6,12 +6,21 @@ using UnityEngine.Timeline;
 
 public class CutsceneController : MonoBehaviour
 {
-    [SerializeField] private PlayableDirector _director;
+    [SerializeField] private PlayableDirector _director_Saved;
+    [SerializeField] private PlayableDirector _director_Died;
 
     // Start is called before the first frame update
     void Start()
     {
-        _director.gameObject.SetActive(false);
+        _director_Saved.gameObject.SetActive(false);
+        _director_Saved.stopped += OnCutsceneEnded;
+        _director_Died.stopped += OnCutsceneEnded;
+    }
+
+    void OnDisable()
+    {
+        _director_Saved.stopped -= OnCutsceneEnded;
+        _director_Died.stopped -= OnCutsceneEnded;
     }
 
     // Update is called once per frame
@@ -22,7 +31,21 @@ public class CutsceneController : MonoBehaviour
 
     public void PlayCutscene_Saved()
     {
-        _director.gameObject.SetActive(true);
-        _director.Play();
+        _director_Saved.gameObject.SetActive(true);
+        _director_Saved.Play();
+    }
+
+    public void PlayCutscene_Died()
+    {
+        _director_Died.gameObject.SetActive(true);
+        _director_Died.Play();
+    }
+
+    private void OnCutsceneEnded(PlayableDirector director)
+    {
+        _director_Died.gameObject.SetActive(false);
+        _director_Saved.gameObject.SetActive(false);
+
+        UIController.Instance.ShowEndScreen();
     }
 }

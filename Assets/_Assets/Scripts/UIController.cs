@@ -4,10 +4,12 @@ using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class UIController : MonoBehaviour
 {
     public Image m_CrosshairImage;
+    public Image m_CrosshairOutlineImage;
     public Color m_Crosshair_NormalColor = Color.white;
     public Color m_Crosshair_ActiveColor = Color.green;
     private bool _currentCrosshairActiveState = false;
@@ -54,17 +56,39 @@ public class UIController : MonoBehaviour
     public void CrosshairEnable()
     {
         if (_currentCrosshairActiveState) { return; }
-        m_CrosshairImage.rectTransform.localScale = Vector3.one * 1.5f;
-        m_CrosshairImage.color = m_Crosshair_ActiveColor;
-        _currentCrosshairActiveState = true;
+
+        m_CrosshairImage.rectTransform.DOComplete();
+        m_CrosshairOutlineImage.rectTransform.DOComplete();
+
+        m_CrosshairImage.rectTransform.DOScale(Vector3.one * 1.5f, 0.3f).SetEase(Ease.InOutBack).OnStart(() =>
+        {
+            m_CrosshairImage.rectTransform.DORotate(Vector3.forward * 90f, 0.3f, RotateMode.LocalAxisAdd);
+            m_CrosshairOutlineImage.rectTransform.DOScale(Vector3.one * 2f, 0.1f);
+            m_CrosshairImage.color = m_Crosshair_ActiveColor;
+        }).OnComplete(() =>
+        {
+
+            _currentCrosshairActiveState = true;
+        });
     }
 
     public void CrosshairDisable()
     {
         if (!_currentCrosshairActiveState) { return; }
-        m_CrosshairImage.rectTransform.localScale = Vector3.one * 1f;
-        m_CrosshairImage.color = m_Crosshair_NormalColor;
-        _currentCrosshairActiveState = false;
+
+        m_CrosshairImage.rectTransform.DOComplete();
+        m_CrosshairOutlineImage.rectTransform.DOComplete();
+
+        m_CrosshairImage.rectTransform.DOScale(Vector3.one, 0.4f).SetEase(Ease.InOutBack).OnStart(() =>
+        {
+            m_CrosshairImage.rectTransform.DORotate(Vector3.forward * 90f, 0.2f, RotateMode.LocalAxisAdd);
+            m_CrosshairOutlineImage.rectTransform.DOScale(Vector3.one, 0.2f);
+            m_CrosshairImage.color = m_Crosshair_NormalColor;
+        }).OnComplete(() =>
+        {
+
+            _currentCrosshairActiveState = false;
+        });
     }
 
     public void UpdateAttentionSlider(float _value)
@@ -85,11 +109,11 @@ public class UIController : MonoBehaviour
         m_GameEndScreen.SetActive(false);
     }
 
-    public void ShowEndScreen(GameEndType _gameEndType)
+    public void ShowEndScreen()
     {
         m_GameEndScreen.SetActive(true);
 
-        switch (_gameEndType)
+        switch (GameManager.Instance._gameEndType)
         {
             case GameEndType.Saved:
                 m_GameEndScreenTitle.text = m_WinText;
@@ -102,7 +126,7 @@ public class UIController : MonoBehaviour
             default:
                 break;
         }
- 
+
     }
 
 

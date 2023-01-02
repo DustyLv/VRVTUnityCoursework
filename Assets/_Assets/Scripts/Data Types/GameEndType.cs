@@ -1,1 +1,1 @@
-public enum GameEndType { Saved, Died}
+public enum GameEndType { None, Saved, Died}

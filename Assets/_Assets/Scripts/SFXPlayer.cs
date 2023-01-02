@@ -6,9 +6,12 @@ public class SFXPlayer : MonoBehaviour
 {
     public AudioClip m_CarHorn;
     public AudioClip[] m_DogBarks;
+    public AudioClip _dogPuke;
+    public AudioClip _dogPoop;
 
     public AudioSource m_AudioSource_Horn;
     public AudioSource m_AudioSource_Dog;
+    public AudioSource m_AudioSource_OneShot_Dog;
 
     public Vector2 m_CarHorn_Pitch_MinMax = Vector2.one;
     public Vector2 m_Dog_Pitch_MinMax = Vector2.one;
@@ -39,5 +42,18 @@ public class SFXPlayer : MonoBehaviour
         float randomPitch = Random.Range(m_Dog_Pitch_MinMax.x, m_Dog_Pitch_MinMax.y);
         m_AudioSource_Dog.pitch = randomPitch;
         m_AudioSource_Dog.Play();
+    }
+
+    public void PlayDogPukeSound()
+    {
+        float randomPitch = Random.Range(m_Dog_Pitch_MinMax.x, m_Dog_Pitch_MinMax.y);
+        m_AudioSource_OneShot_Dog.pitch = randomPitch;
+        m_AudioSource_OneShot_Dog.PlayOneShot(_dogPuke);
+    }
+    public void PlayDogPoopSound()
+    {
+        float randomPitch = Random.Range(m_Dog_Pitch_MinMax.x, m_Dog_Pitch_MinMax.y);
+        m_AudioSource_OneShot_Dog.pitch = randomPitch;
+        m_AudioSource_OneShot_Dog.PlayOneShot(_dogPoop);
     }
 }

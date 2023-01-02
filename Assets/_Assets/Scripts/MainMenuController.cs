@@ -1,13 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class MainMenuController : MonoBehaviour
 {
-    [SerializeField] private string _gameSceneName = "GameScene";
-
     [SerializeField] private Material _fullscreenEffectMaterial;
 
 
@@ -33,10 +30,7 @@ public class MainMenuController : MonoBehaviour
         ResetFullscreenEffect();
     }
 
-    public void LoadGameScene()
-    {
-        StartCoroutine(LoadSceneAsync(_gameSceneName));
-    }
+
 
     public void ExitGame()
     {
@@ -60,18 +54,6 @@ public class MainMenuController : MonoBehaviour
     {
         m_HelpTransform.anchoredPosition = new Vector2(0, m_Help_VerticalPositionOnOff.y);
     }
-
-    private IEnumerator LoadSceneAsync(string _sceneName)
-    {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(_sceneName);
-
-        // Wait until the asynchronous scene fully loads
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-    }
-
 
     private void SetFullscreenEffect()
     {

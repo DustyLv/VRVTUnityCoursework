@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     public Action OnGameEnd;
 
+    public GameEndType _gameEndType = GameEndType.None;
+
     private CutsceneController _cutsceneController;
 
     public static GameManager Instance;
@@ -40,10 +42,11 @@ public class GameManager : MonoBehaviour
         GameRunning = true;
     }
 
-    public void GameEnd(GameEndType _gameEndType)
+    public void GameEnd(GameEndType gameEndType)
     {
         GameRunning = false;
         OnGameEndInvoke();
+        _gameEndType = gameEndType;
         switch (_gameEndType)
         {
             case GameEndType.Saved:
@@ -53,7 +56,8 @@ public class GameManager : MonoBehaviour
                 break;
             case GameEndType.Died:
                 print("--- GAME END!   YOU DIED!!");
-                UIController.Instance.ShowEndScreen(_gameEndType);
+                _cutsceneController.PlayCutscene_Died();
+                //UIController.Instance.ShowEndScreen(_gameEndType);
                 break;
             default:
                 break;

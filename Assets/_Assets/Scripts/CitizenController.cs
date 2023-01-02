@@ -67,14 +67,22 @@ public class CitizenController : MonoBehaviour
         _spawnedCitizenCount += 1;
     }
 
-    public void SpawnHeroCitizen()
+    public void CitizenCheer()
     {
-        int randValue = Random.Range(0, _citizenCharacterModelPrefabs.Count);
-
-        Citizen citizenBase = Instantiate(_citizenBasePrefab, _spawnPoint_Hero.position, Quaternion.identity);
-        GameObject citizenCharacterModel = Instantiate(_citizenCharacterModelPrefabs[randValue], citizenBase.transform.position, Quaternion.identity, citizenBase.gameObject.transform);
-        citizenBase.SetCitizenVariables(_goalPoint_Hero.position, _citizenLookAtTarget, true);
+        foreach(Citizen c in _spawnedCitizens)
+        {
+            c.TriggerEndEmote();
+        }
     }
+
+    //public void SpawnHeroCitizen()
+    //{
+    //    int randValue = Random.Range(0, _citizenCharacterModelPrefabs.Count);
+
+    //    Citizen citizenBase = Instantiate(_citizenBasePrefab, _spawnPoint_Hero.position, Quaternion.identity);
+    //    GameObject citizenCharacterModel = Instantiate(_citizenCharacterModelPrefabs[randValue], citizenBase.transform.position, Quaternion.identity, citizenBase.gameObject.transform);
+    //    citizenBase.SetCitizenVariables(_goalPoint_Hero.position, _citizenLookAtTarget, true);
+    //}
 
     private Transform GetRandomSpawnPoint()
     {
