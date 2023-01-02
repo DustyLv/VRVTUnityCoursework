@@ -61,7 +61,7 @@ public class PresentGenerator : MonoBehaviour
     {
         yield return new WaitForSeconds(Random.Range(_poopTimerMinMax.x, _poopTimerMinMax.y));
         Poop();
-        StartCoroutine(PanicPoops());
+        StartCoroutine("PanicPoops");
     }
 
     private void StopPooping()
