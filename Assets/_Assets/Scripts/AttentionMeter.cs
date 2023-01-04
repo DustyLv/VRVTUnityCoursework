@@ -42,7 +42,6 @@ public class AttentionMeter : MonoBehaviour
 
         if (m_AttentionIncreaseValue > 0)
         {
-            //_currentAttention += (m_AttentionIncreasePerSource * _attentionSources.Count) * Time.deltaTime;
             _currentAttention += m_AttentionIncreaseValue * Time.deltaTime;
         }
         else
@@ -60,30 +59,13 @@ public class AttentionMeter : MonoBehaviour
         UIController.Instance.UpdateAttentionSlider(_currentAttention / _maxAttentionValue);
     }
 
-    //IEnumerator UpdateAttentionMeter()
-    //{
-
-    //}
-
     public void AddAttentionSource(AttentionSource _source, float _addAttentionValue)
     {
         m_AttentionIncreaseValue += _addAttentionValue;
-
-        //if (!_attentionSources.Contains(_source))
-        //{
-        //    _attentionSources.Add(_source);
-        //    m_AttentionIncreaseValue += _addAttentionValue;
-        //}
     }
 
     public void RemoveAttentionSource(AttentionSource _source, float _addAttentionValue)
     {
         m_AttentionIncreaseValue -= _addAttentionValue;
-
-        //if (_attentionSources.Contains(_source))
-        //{
-        //    _attentionSources.Remove(_source);
-        //    m_AttentionIncreaseValue -= _addAttentionValue;
-        //}
     }
 }

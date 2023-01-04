@@ -10,7 +10,8 @@ public class MainMenuController : MonoBehaviour
 
     public RectTransform m_HelpTransform;
     public Vector2 m_Help_VerticalPositionOnOff = Vector2.zero;
-    //public Vector2 m_Help_OffScreenPosition = Vector2.zero;
+    public Ease m_Ease;
+    public float m_HelpTweenLength = 0.3f;
 
     // Start is called before the first frame update
     void Start()
@@ -42,12 +43,12 @@ public class MainMenuController : MonoBehaviour
 
     public void ShowHelp()
     {
-        m_HelpTransform.DOAnchorPosY(m_Help_VerticalPositionOnOff.x, 0.5f);
+        m_HelpTransform.DOAnchorPosY(m_Help_VerticalPositionOnOff.x, m_HelpTweenLength).SetEase(m_Ease);
     }
 
     public void HideHelp()
     {
-        m_HelpTransform.DOAnchorPosY(m_Help_VerticalPositionOnOff.y, 0.5f);
+        m_HelpTransform.DOAnchorPosY(m_Help_VerticalPositionOnOff.y, m_HelpTweenLength).SetEase(m_Ease);
     }
 
     private void HideHelpInstant()

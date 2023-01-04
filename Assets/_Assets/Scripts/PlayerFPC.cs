@@ -57,7 +57,7 @@ public class PlayerFPC : MonoBehaviour
             {
                 moveDirection.y = jumpSpeed;
                 _attentionSource.TryActivateSource();
-                _sfxPlayer.PlayDogSound();
+                _sfxPlayer.PlayDogBarkSound();
             }
         }
 

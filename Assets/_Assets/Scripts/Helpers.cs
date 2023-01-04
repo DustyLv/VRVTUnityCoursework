@@ -8,4 +8,9 @@ public static class Helpers
     {
         return _collection[Random.Range(0, _collection.Length)];
     }
+
+    public static bool Contains(this LayerMask mask, int layer)
+    {
+        return mask == (mask | (1 << layer));
+    }
 }

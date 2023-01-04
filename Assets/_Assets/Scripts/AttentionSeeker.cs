@@ -8,8 +8,6 @@ public class AttentionSeeker : MonoBehaviour
     [SerializeField] private LayerMask m_LayerMask = -1;
     [SerializeField] private float m_ActivationDistance = 1f;
 
-    [SerializeField] private PlayerAnimator _playerAnimator;
-
     private GameObject m_HitObject;
 
     // Start is called before the first frame update

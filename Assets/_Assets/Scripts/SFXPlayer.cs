@@ -36,7 +36,7 @@ public class SFXPlayer : MonoBehaviour
         m_AudioSource_Horn.Play();
     }
 
-    public void PlayDogSound()
+    public void PlayDogBarkSound()
     {
         m_AudioSource_Dog.clip = Helpers.GetRandomAudioClipFromCollection(m_DogBarks);
         float randomPitch = Random.Range(m_Dog_Pitch_MinMax.x, m_Dog_Pitch_MinMax.y);
