@@ -31,6 +31,8 @@ public class PlayerFPC : MonoBehaviour
         EnableInput();
 
         GameManager.Instance.OnGameEnd += DisableInput;
+        GameManager.Instance.OnGamePause += DisableInput;
+        GameManager.Instance.OnGameResume += EnableInput;
 
 
     }

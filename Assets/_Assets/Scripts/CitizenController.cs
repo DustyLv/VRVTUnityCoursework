@@ -10,9 +10,6 @@ public class CitizenController : MonoBehaviour
     [SerializeField] private List<Transform> _goalPoints;
     [SerializeField] private Transform _citizenLookAtTarget;
 
-    [SerializeField] private Transform _spawnPoint_Hero;
-    [SerializeField] private Transform _goalPoint_Hero;
-
     [SerializeField] private int _maxSpawnedCitizens = 30;
 
     private AttentionMeter _attentionMeter;
@@ -25,7 +22,9 @@ public class CitizenController : MonoBehaviour
     {
         _attentionMeter = FindObjectOfType<AttentionMeter>();
         GameManager.Instance.OnGameEnd += StopSpawning;
-        StartCoroutine("TimedSpawn");
+        GameManager.Instance.OnGamePause += StopSpawning;
+        GameManager.Instance.OnGameResume += StartSpawning;
+        StartSpawning();
     }
 
     // Update is called once per frame
@@ -51,6 +50,11 @@ public class CitizenController : MonoBehaviour
 
     }
 
+    private void StartSpawning()
+    {
+        StartCoroutine("TimedSpawn");
+    }
+
     private void StopSpawning()
     {
         StopCoroutine("TimedSpawn");
@@ -74,15 +78,6 @@ public class CitizenController : MonoBehaviour
             c.TriggerEndEmote();
         }
     }
-
-    //public void SpawnHeroCitizen()
-    //{
-    //    int randValue = Random.Range(0, _citizenCharacterModelPrefabs.Count);
-
-    //    Citizen citizenBase = Instantiate(_citizenBasePrefab, _spawnPoint_Hero.position, Quaternion.identity);
-    //    GameObject citizenCharacterModel = Instantiate(_citizenCharacterModelPrefabs[randValue], citizenBase.transform.position, Quaternion.identity, citizenBase.gameObject.transform);
-    //    citizenBase.SetCitizenVariables(_goalPoint_Hero.position, _citizenLookAtTarget, true);
-    //}
 
     private Transform GetRandomSpawnPoint()
     {

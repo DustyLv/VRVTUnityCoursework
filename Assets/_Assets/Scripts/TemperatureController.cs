@@ -21,6 +21,8 @@ public class TemperatureController : MonoBehaviour
         UpdateTemperature();
         GameManager.Instance.OnGameEnd += DisableTemperatureUpdate;
         GameManager.Instance.OnGameEnd += ResetFullscreenEffect;
+        GameManager.Instance.OnGamePause += PauseTemperatureUpdate;
+        GameManager.Instance.OnGameResume += UnpauseTemperatureUpdate;
     }
 
     private void OnEnable()
@@ -49,6 +51,16 @@ public class TemperatureController : MonoBehaviour
     private void DisableTemperatureUpdate()
     {
         DOTween.Kill("tempTween");
+    }
+
+    private void PauseTemperatureUpdate()
+    {
+        DOTween.Pause("tempTween");
+    }
+
+    private void UnpauseTemperatureUpdate()
+    {
+        DOTween.Play("tempTween");
     }
 
     private void ResetFullscreenEffect()

@@ -8,18 +8,23 @@ public class AttentionSeeker : MonoBehaviour
     [SerializeField] private LayerMask m_LayerMask = -1;
     [SerializeField] private float m_ActivationDistance = 1f;
 
+    private bool _attentionSeekingEnabled = false;
+
     private GameObject m_HitObject;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        GameManager.Instance.OnGamePause += DisableAttentionSeeking;
+        GameManager.Instance.OnGameResume += EnableAttentionSeeking;
+        GameManager.Instance.OnGameEnd += DisableAttentionSeeking;
+        EnableAttentionSeeking();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!GameManager.Instance.GameRunning) { return; }
+        if (!_attentionSeekingEnabled) { return; }
 
         RaycastHit hit;
         if (Physics.Raycast(m_RaycastSourcePosition.position, m_RaycastSourcePosition.TransformDirection(Vector3.forward), out hit, m_ActivationDistance, m_LayerMask))
@@ -56,5 +61,14 @@ public class AttentionSeeker : MonoBehaviour
                 //_playerAnimator.TriggerActionAnimation();
             }
         }
+    }
+
+    private void EnableAttentionSeeking()
+    {
+        _attentionSeekingEnabled = true;
+    }
+    private void DisableAttentionSeeking()
+    {
+        _attentionSeekingEnabled = false;
     }
 }

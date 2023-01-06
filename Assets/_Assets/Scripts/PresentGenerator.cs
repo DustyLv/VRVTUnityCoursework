@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Lean.Pool;
 
 public class PresentGenerator : MonoBehaviour
 {
@@ -12,7 +13,10 @@ public class PresentGenerator : MonoBehaviour
 
     [SerializeField] private Transform _pukeDecalPrefab;
     [SerializeField] private Vector2 _decalScaleVariance = Vector2.one;
-    
+    [SerializeField] private ParticleSystem _pukeParticles;
+
+    [SerializeField] private LeanGameObjectPool _vomitPool;
+
     [Header("Poop Stuff")]
     [SerializeField] private KeyCode _poopKey;
     [SerializeField] private Transform _poopSource;
@@ -21,6 +25,7 @@ public class PresentGenerator : MonoBehaviour
     [SerializeField] private float _poopForce;
     [SerializeField] private Vector2 _poopTimerMinMax = new Vector2(5f,15f);
 
+    private bool _presentGenerationEnabled = false;
 
     private SFXPlayer _sfxPlayer;
 
@@ -28,39 +33,56 @@ public class PresentGenerator : MonoBehaviour
     void Start()
     {
         _sfxPlayer = FindObjectOfType<SFXPlayer>();
-        StartCoroutine("PanicPoops");
-        GameManager.Instance.OnGameEnd += StopPooping;
+
+        EnablePresents();
+        GameManager.Instance.OnGameEnd += DisablePresents;
+        GameManager.Instance.OnGamePause += DisablePresents;
+        GameManager.Instance.OnGameResume += EnablePresents;
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        if (!GameManager.Instance.GameRunning) { return; }
-        if (Input.GetMouseButtonDown(1))
+        if (!_presentGenerationEnabled) { return; }
+        if (Input.GetMouseButtonDown(1) && !_pukeParticles.isEmitting)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(m_RaycastSourcePosition.position, m_RaycastSourcePosition.TransformDirection(Vector3.forward), out hit, m_ActivationDistance, m_LayerMask))
-            {
-                Puke(hit);
-            }
+                Puke();
         }
-
-        //if (Input.GetKeyDown(_poopKey))
-        //{
-        //    Poop();
-        //}
     }
 
-    private void Puke(RaycastHit hit)
+    private void Puke()
     {
-        Transform pukeObject = Instantiate(_pukeDecalPrefab, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
-        pukeObject.localScale = Vector3.one * Random.Range(_decalScaleVariance.x, _decalScaleVariance.y);
+        _pukeParticles.Play();
         _sfxPlayer.PlayDogPukeSound();
     }
+
+    public void PlacePukeDecal(ParticleCollisionEvent collision)
+    {
+        GameObject vomitObj = _vomitPool.Spawn(collision.intersection, Quaternion.FromToRotation(Vector3.forward, collision.normal), _vomitPool.transform);
+        vomitObj.transform.localScale = Vector3.one * Random.Range(_decalScaleVariance.x, _decalScaleVariance.y);
+    }
+
+    private void EnablePresents()
+    {
+        _presentGenerationEnabled = true;
+        StartPooping();
+    }
+
+    private void DisablePresents()
+    {
+        _presentGenerationEnabled = false;
+        StopPooping();
+    }
+
 
     private IEnumerator PanicPoops()
     {
         yield return new WaitForSeconds(Random.Range(_poopTimerMinMax.x, _poopTimerMinMax.y));
         Poop();
+        StartCoroutine("PanicPoops");
+    }
+
+    private void StartPooping()
+    {
         StartCoroutine("PanicPoops");
     }
 

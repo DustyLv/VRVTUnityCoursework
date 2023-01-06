@@ -1,0 +1,244 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!200 &20000000
+ShaderVariantCollection:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: NewShaderVariants
+  m_Shaders:
+  - first: {fileID: 10770, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: UNITY_UI_ALPHACLIP
+        passType: 0
+      - keywords: UNITY_UI_CLIP_RECT
+        passType: 0
+  - first: {fileID: 66, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 106, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: _SUNDISK_SIMPLE
+        passType: 0
+  - first: {fileID: 9000, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9001, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9002, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9003, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9004, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9007, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9101, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9103, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: d6dae50ee9e1bfa4db75f19f99355220, type: 3}
+    second:
+      variants:
+      - keywords: _OUTPUT_DEPTH
+        passType: 0
+  - first: {fileID: 4800000, guid: 65df88701913c224d95fc554db28381a, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: e7857e9d0c934dc4f83f270f8447b006, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: _BLOOM_LQ
+        passType: 0
+  - first: {fileID: 4800000, guid: e6e9a19c3678ded42a3bc431ebef7dbd, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 93446b5c5339d4f00b85c159e1159b7c, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 0849e84e3d62649e8882e9d6f056a017, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: _INTERLEAVED_GRADIENT _ORTHOGRAPHIC _SAMPLE_COUNT_MEDIUM _SOURCE_DEPTH_NORMALS
+        passType: 0
+      - keywords: _INTERLEAVED_GRADIENT _SAMPLE_COUNT_MEDIUM _SOURCE_DEPTH_NORMALS
+        passType: 0
+  - first: {fileID: 4800000, guid: 5f1864addb451f54bae8c86d230f736e, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 8d2bb70cbf9db8d4da26e15b26e74248, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: DIRLIGHTMAP_COMBINED LIGHTMAP_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _DBUFFER_MRT3 _EMISSION _MAIN_LIGHT_SHADOWS _WRITE_RENDERING_LAYERS
+        passType: 13
+      - keywords: DIRLIGHTMAP_COMBINED LIGHTMAP_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _DBUFFER_MRT3 _EMISSION _MAIN_LIGHT_SHADOWS_CASCADE _SHADOWS_SOFT _WRITE_RENDERING_LAYERS
+        passType: 13
+      - keywords: DIRLIGHTMAP_COMBINED LIGHTMAP_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _DBUFFER_MRT3 _MAIN_LIGHT_SHADOWS _WRITE_RENDERING_LAYERS
+        passType: 13
+      - keywords: DIRLIGHTMAP_COMBINED LIGHTMAP_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _DBUFFER_MRT3 _MAIN_LIGHT_SHADOWS_CASCADE _SHADOWS_SOFT _WRITE_RENDERING_LAYERS
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _DBUFFER_MRT3 _EMISSION
+          _MAIN_LIGHT_SHADOWS_CASCADE _RECEIVE_SHADOWS_OFF _SHADOWS_SOFT _WRITE_RENDERING_LAYERS
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _DBUFFER_MRT3 _MAIN_LIGHT_SHADOWS
+          _WRITE_RENDERING_LAYERS
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _DBUFFER_MRT3 _MAIN_LIGHT_SHADOWS_CASCADE
+          _SHADOWS_SOFT _WRITE_RENDERING_LAYERS
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _EMISSION _MAIN_LIGHT_SHADOWS
+          _RECEIVE_SHADOWS_OFF _WRITE_RENDERING_LAYERS
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
+          _WRITE_RENDERING_LAYERS
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _MAIN_LIGHT_SHADOWS _RECEIVE_SHADOWS_OFF
+        passType: 13
+      - keywords: _WRITE_RENDERING_LAYERS
+        passType: 13
+  - first: {fileID: 4800000, guid: 0406db5a14f94604a8c57ccfbc9f3b46, type: 3}
+    second:
+      variants:
+      - keywords: _ALPHATEST_ON
+        passType: 0
+      - keywords: _SURFACE_TYPE_TRANSPARENT
+        passType: 0
+      - keywords: 
+        passType: 13
+      - keywords: _ALPHATEST_ON
+        passType: 13
+  - first: {fileID: 4800000, guid: f056d8bd2a1c7e44e9729144b4c70395, type: 3}
+    second:
+      variants:
+      - keywords: _DBUFFER_MRT3
+        passType: 0
+  - first: {fileID: 4800000, guid: 36e335017ad71d54fbb10842863188ae, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: e4e5d566a8aa9914c906555a6857fcb9, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: -6465566751694194690, guid: f8e62b3ed2ad7414fba93d58838213e7,
+      type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: 
+        passType: 13
+      - keywords: DIRLIGHTMAP_COMBINED LIGHTMAP_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _DBUFFER_MRT3 _MAIN_LIGHT_SHADOWS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION
+          _WRITE_RENDERING_LAYERS
+        passType: 13
+      - keywords: DIRLIGHTMAP_COMBINED LIGHTMAP_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _DBUFFER_MRT3 _MAIN_LIGHT_SHADOWS_CASCADE _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION
+          _SHADOWS_SOFT _WRITE_RENDERING_LAYERS
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _DBUFFER_MRT3 _MAIN_LIGHT_SHADOWS
+          _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _WRITE_RENDERING_LAYERS
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _DBUFFER_MRT3 _MAIN_LIGHT_SHADOWS_CASCADE
+          _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT
+          _WRITE_RENDERING_LAYERS
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
+          _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _WRITE_RENDERING_LAYERS
+        passType: 13
+      - keywords: _WRITE_RENDERING_LAYERS
+        passType: 13
+  - first: {fileID: 4800000, guid: 11884bbab6629c44187577ddd7b9ce22, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: -6465566751694194690, guid: 3d8791a6bb0deff49a3ed2d1781d4332,
+      type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: BEVEL_ON
+        passType: 0
+  - first: {fileID: -6465566751694194690, guid: 9c51fe8fdb975e74799fdd14e65b59f7,
+      type: 3}
+    second:
+      variants:
+      - keywords: _DBUFFER_MRT3 _DECAL_LAYERS
+        passType: 13
+  - first: {fileID: 4800000, guid: 0d949f33aae55df4d92d64ec31581556, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 952471cc7e81a214fbe1eade4ae7c649, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 960aca9aa5d48ad4b8b522dbbab26d8a, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: c55a8fe4b61dcfb41a8aaa1869b89fed, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0

@@ -29,16 +29,22 @@ public class AttentionMeter : MonoBehaviour
 
     }
 
+    private bool _attentionUpdateEnabled = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.Instance.OnGamePause += DisableAttentionUpdate;
+        GameManager.Instance.OnGameResume += EnableAttentionUpdate;
+        GameManager.Instance.OnGameEnd += DisableAttentionUpdate;
+        EnableAttentionUpdate();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.Instance.GameRunning) { return; }
+        if (!_attentionUpdateEnabled) { return; }
 
         if (m_AttentionIncreaseValue > 0)
         {
@@ -67,5 +73,14 @@ public class AttentionMeter : MonoBehaviour
     public void RemoveAttentionSource(AttentionSource _source, float _addAttentionValue)
     {
         m_AttentionIncreaseValue -= _addAttentionValue;
+    }
+
+    private void EnableAttentionUpdate()
+    {
+        _attentionUpdateEnabled = true;
+    }
+    private void DisableAttentionUpdate()
+    {
+        _attentionUpdateEnabled = false;
     }
 }

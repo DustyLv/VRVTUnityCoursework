@@ -31,12 +31,24 @@ public class CutsceneController : MonoBehaviour
 
     public void PlayCutscene_Saved()
     {
+        StartCoroutine(PlayCutscene_Saved_Routine());
+    }
+
+    private IEnumerator PlayCutscene_Saved_Routine()
+    {
+        yield return new WaitForSeconds(2f);
         _director_Saved.gameObject.SetActive(true);
         _director_Saved.Play();
     }
 
     public void PlayCutscene_Died()
     {
+        StartCoroutine(PlayCutscene_Died_Routine());
+    }
+
+    private IEnumerator PlayCutscene_Died_Routine()
+    {
+        yield return new WaitForSeconds(2f);
         _director_Died.gameObject.SetActive(true);
         _director_Died.Play();
     }

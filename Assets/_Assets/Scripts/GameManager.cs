@@ -8,8 +8,11 @@ public class GameManager : MonoBehaviour
 {
     public float GameLength = 30f;
     public bool GameRunning = false;
+    public bool GamePaused = false;
 
     public Action OnGameEnd;
+    public Action OnGamePause;
+    public Action OnGameResume;
 
     public GameEndType _gameEndType = GameEndType.None;
 
@@ -34,19 +37,52 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!GameRunning) return;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!GamePaused)
+            {
+                GamePause();
+            }
+            else
+            {
+                GameResume();
+            }
+        }
     }
 
     public void GameStart()
     {
         GameRunning = true;
     }
+    public void GameStop()
+    {
+        GameRunning = false;
+    }
+
+    public void GamePause()
+    {
+        GamePaused = true;
+        OnGamePause?.Invoke();
+    }
+
+    public void GameResume()
+    {
+        GamePaused = false;
+        OnGameResume?.Invoke();
+    }
 
     public void GameEnd(GameEndType gameEndType)
     {
-        GameRunning = false;
+        StartCoroutine(GameEndRoutine(gameEndType));
+    }
+
+    private IEnumerator GameEndRoutine(GameEndType gameEndType)
+    {
+        GameStop();
         OnGameEndInvoke();
         _gameEndType = gameEndType;
+        yield return new WaitForSeconds(2f);
         switch (_gameEndType)
         {
             case GameEndType.Saved:

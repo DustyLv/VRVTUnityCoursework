@@ -15,7 +15,9 @@ public class Radio : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        GameManager.Instance.OnGameResume += UnpauseRadio;
+        GameManager.Instance.OnGamePause += PauseRadio;
+        GameManager.Instance.OnGameEnd += StopRadio;
     }
 
     // Update is called once per frame
@@ -44,17 +46,19 @@ public class Radio : MonoBehaviour
 
     public void StopRadio()
     {
-        
         m_AudioSource.Stop();
         m_AudioSource.PlayOneShot(m_RadioClick_Off);
-        //m_AudioSource.DOFade(0f, m_VolumeFadeLength).OnComplete(() =>
-        //{
+    }
 
-        //    m_AudioSource.volume = 1f;
+    public void UnpauseRadio()
+    {
+        m_AudioSource.UnPause();
+    }
 
-        //});
-
-
+    public void PauseRadio()
+    {
+        if (!m_AudioSource.isPlaying) return;
+        m_AudioSource.Pause();
     }
 
     private IEnumerator StopRadioRoutine()

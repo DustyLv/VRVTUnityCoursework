@@ -14,6 +14,10 @@ public class UIController : MonoBehaviour
     public Color m_Crosshair_ActiveColor = Color.green;
     private bool _currentCrosshairActiveState = false;
 
+    public CanvasGroup m_ScreenFader;
+
+    public GameObject m_PauseScreen;
+
     public Slider m_AttentionSlider;
     private Image _attentionSliderFillImage;
     public Gradient m_AttentionGradient;
@@ -45,6 +49,16 @@ public class UIController : MonoBehaviour
         SetUpEndScreen();
 
         GameManager.Instance.OnGameEnd += CrosshairDisable;
+        GameManager.Instance.OnGameEnd += FadeScreen_HideScreen;
+
+        GameManager.Instance.OnGamePause += ShowPauseScreen;
+        GameManager.Instance.OnGameResume += HidePauseScreen;
+
+        HidePauseScreen();
+
+        m_ScreenFader.alpha = 1f;
+        FadeScreen_ShowScreen();
+        
     }
 
     // Update is called once per frame
@@ -91,6 +105,26 @@ public class UIController : MonoBehaviour
         });
     }
 
+    public void FadeScreen_ShowScreen()
+    {
+        m_ScreenFader.DOFade(0f, 2f);
+    }
+
+    public void FadeScreen_HideScreen()
+    {
+        m_ScreenFader.DOFade(1f, 2f);
+    }
+
+    public void ShowPauseScreen()
+    {
+        m_PauseScreen.SetActive(true);
+    }
+
+    public void HidePauseScreen()
+    {
+        m_PauseScreen.SetActive(false);
+    }
+
     public void UpdateAttentionSlider(float _value)
     {
         UpdateSliderValue(m_AttentionSlider, _value);
@@ -112,7 +146,7 @@ public class UIController : MonoBehaviour
     public void ShowEndScreen()
     {
         m_GameEndScreen.SetActive(true);
-
+        FadeScreen_ShowScreen();
         switch (GameManager.Instance._gameEndType)
         {
             case GameEndType.Saved:
