@@ -20,8 +20,6 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
-    
-
     private void Awake()
     {
         Instance = this;
@@ -86,14 +84,10 @@ public class GameManager : MonoBehaviour
         switch (_gameEndType)
         {
             case GameEndType.Saved:
-                print("--- GAME END!   YOU GOT SAVED!!");
                 _cutsceneController.PlayCutscene_Saved();
-                //UIController.Instance.ShowEndScreen(_gameEndType);
                 break;
             case GameEndType.Died:
-                print("--- GAME END!   YOU DIED!!");
                 _cutsceneController.PlayCutscene_Died();
-                //UIController.Instance.ShowEndScreen(_gameEndType);
                 break;
             default:
                 break;

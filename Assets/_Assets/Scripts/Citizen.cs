@@ -12,8 +12,6 @@ public class Citizen : MonoBehaviour
     private bool _destinationReached = false;
     private Transform _lookAtTargetTransform = null;
 
-    private bool _isHero = false;
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -56,7 +54,7 @@ public class Citizen : MonoBehaviour
         _animator.SetTrigger("cheer" + randNumber);
     }
 
-    public void SetCitizenVariables(Vector3 goal, Transform lookAtTarget, bool isHero)
+    public void SetCitizenVariables(Vector3 goal, Transform lookAtTarget)
     {
         GetReferences();
 
@@ -65,8 +63,6 @@ public class Citizen : MonoBehaviour
         _animator.SetBool("walking", true);
 
         _lookAtTargetTransform = lookAtTarget;
-
-        _isHero = isHero;
     }
 
     public bool ReachedDestinationOrGaveUp()

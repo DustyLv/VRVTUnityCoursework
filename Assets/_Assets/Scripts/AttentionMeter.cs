@@ -4,28 +4,20 @@ using UnityEngine;
 
 public class AttentionMeter : MonoBehaviour
 {
-    //public float m_AttentionIncreasePerSource = 0.1f;
-    public float m_AttentionIncreaseValue = 0f;
-    public float m_AttentionDecrease = 0.2f;
-    [SerializeField] private List<AttentionSource> _attentionSources = new List<AttentionSource>();
+    [SerializeField] private float m_AttentionIncreaseValue = 0f;
+    [SerializeField] private float m_AttentionDecrease = 0.2f;
+    //[SerializeField] private List<AttentionSource> _attentionSources = new List<AttentionSource>();
     private float _currentAttention = 0f;
     public float CurrentAttention
     {
-        get
-        {
-            return _currentAttention;
-        }
+        get => _currentAttention;
     }
 
 
     private float _maxAttentionValue = 100f;
     public float MaxAttentionValue
     {
-
-        get
-        {
-            return _maxAttentionValue;
-        }
+        get => _maxAttentionValue;
 
     }
 

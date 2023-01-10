@@ -6,18 +6,14 @@ using DG.Tweening;
 public class TemperatureController : MonoBehaviour
 {
     private float _currentTemperature = 0f;
-    //private Vector2 _temperatureRangeMinMax = new Vector2(25f, 50f);
     private float _temperatureMaxValue = 1f;
 
-    //[SerializeField] private float _temperatureRaiseValue = 0.1f;
     [SerializeField] private Material _fullscreenEffectMaterial;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //_currentTemperature = 0f;
-
         UpdateTemperature();
         GameManager.Instance.OnGameEnd += DisableTemperatureUpdate;
         GameManager.Instance.OnGameEnd += ResetFullscreenEffect;

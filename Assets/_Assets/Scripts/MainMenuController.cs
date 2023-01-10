@@ -8,10 +8,10 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Material _fullscreenEffectMaterial;
 
 
-    public RectTransform m_HelpTransform;
-    public Vector2 m_Help_VerticalPositionOnOff = Vector2.zero;
-    public Ease m_Ease;
-    public float m_HelpTweenLength = 0.3f;
+    [SerializeField] private RectTransform m_HelpTransform;
+    [SerializeField] private Vector2 m_Help_VerticalPositionOnOff = Vector2.zero;
+    [SerializeField] private Ease m_Ease;
+    [SerializeField] private float m_HelpTweenLength = 0.3f;
 
     // Start is called before the first frame update
     void Start()

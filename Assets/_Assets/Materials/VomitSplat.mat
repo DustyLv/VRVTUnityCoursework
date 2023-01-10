@@ -81,6 +81,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Normal_Map:
+        m_Texture: {fileID: 2800000, guid: 1cbe0c059c9e2f34486883e1adbe1290, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -118,7 +122,7 @@ Material:
     - _Cull: 2
     - _Cutoff: 0.5
     - _DecalAngleFadeSupported: 1
-    - _DecalMeshBiasType: 0
+    - _DecalMeshBiasType: 1
     - _DecalMeshDepthBias: 0
     - _DecalMeshViewBias: 0
     - _DetailAlbedoMapScale: 1

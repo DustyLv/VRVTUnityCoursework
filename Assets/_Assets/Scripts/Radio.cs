@@ -5,12 +5,12 @@ using DG.Tweening;
 
 public class Radio : MonoBehaviour
 {
-    public AudioClip[] m_MusicClips;
-    public AudioClip m_RadioClick_On;
-    public AudioClip m_RadioClick_Off;
-    public AudioSource m_AudioSource;
+    [SerializeField] private AudioClip[] _musicClips;
+    [SerializeField] private AudioClip _radioClick_On;
+    [SerializeField] private AudioClip _radioClick_Off;
+    [SerializeField] private AudioSource _audioSource;
 
-    public float m_VolumeFadeLength = 0.2f;
+    [SerializeField] private float _volumeFadeLength = 0.2f;
 
     // Start is called before the first frame update
     void Start()
@@ -20,12 +20,6 @@ public class Radio : MonoBehaviour
         GameManager.Instance.OnGameEnd += StopRadio;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void PlayRandomSong()
     {
         StartCoroutine(PlayRandomSongRoutine());
@@ -33,38 +27,43 @@ public class Radio : MonoBehaviour
 
     private IEnumerator PlayRandomSongRoutine()
     {
-        m_AudioSource.PlayOneShot(m_RadioClick_On);
-        yield return new WaitForSeconds(m_RadioClick_On.length);
-        m_AudioSource.volume = 0f;
-        m_AudioSource.DOFade(1f, m_VolumeFadeLength).OnStart(() =>
+        _audioSource.PlayOneShot(_radioClick_On);
+        yield return new WaitForSeconds(_radioClick_On.length);
+        _audioSource.volume = 0f;
+        AudioClip clip = Helpers.GetRandomAudioClipFromCollection(_musicClips);
+        _audioSource.DOFade(1f, _volumeFadeLength).OnStart(() =>
         {
-            m_AudioSource.clip = Helpers.GetRandomAudioClipFromCollection(m_MusicClips);
-            m_AudioSource.Play();
+            _audioSource.clip = clip;
+            _audioSource.Play();
         });
 
+        yield return new WaitForSeconds(clip.length);
+        _audioSource.PlayOneShot(_radioClick_Off);
     }
 
     public void StopRadio()
     {
-        m_AudioSource.Stop();
-        m_AudioSource.PlayOneShot(m_RadioClick_Off);
+        if (!_audioSource.isPlaying) return;
+
+        _audioSource.Stop();
+        _audioSource.PlayOneShot(_radioClick_Off);
     }
 
     public void UnpauseRadio()
     {
-        m_AudioSource.UnPause();
+        _audioSource.UnPause();
     }
 
     public void PauseRadio()
     {
-        if (!m_AudioSource.isPlaying) return;
-        m_AudioSource.Pause();
+        if (!_audioSource.isPlaying) return;
+        _audioSource.Pause();
     }
 
     private IEnumerator StopRadioRoutine()
     {
 
-        yield return new WaitForSeconds(m_RadioClick_Off.length * 2f);
+        yield return new WaitForSeconds(_radioClick_Off.length * 2f);
 
     }
 }

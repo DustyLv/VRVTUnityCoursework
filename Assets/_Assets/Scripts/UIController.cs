@@ -128,7 +128,6 @@ public class UIController : MonoBehaviour
     public void UpdateAttentionSlider(float _value)
     {
         UpdateSliderValue(m_AttentionSlider, _value);
-        //UpdateSliderColor(_attentionSliderFillImage, m_AttentionGradient, _value);
     }
     public void UpdateTemperatureSlider(float _value)
     {
@@ -160,9 +159,7 @@ public class UIController : MonoBehaviour
             default:
                 break;
         }
-
     }
-
 
     private void UpdateSliderValue(Slider _slider, float _value)
     {

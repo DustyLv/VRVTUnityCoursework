@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class OutOfBoundsTeleport : MonoBehaviour
 {
-    public LayerMask checkLayers = -1;
-    public Transform teleportPosition;
+    [SerializeField] private LayerMask checkLayers = -1;
+    [SerializeField] private Transform teleportPosition;
 
     // Start is called before the first frame update
     void Start()

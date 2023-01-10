@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Lean.Pool;
 
 public class CitizenController : MonoBehaviour
 {
     [SerializeField] private Citizen _citizenBasePrefab;
+    [SerializeField] private Transform _citizenHolderObject;
+
     [SerializeField] private List<GameObject> _citizenCharacterModelPrefabs;
     [SerializeField] private List<Transform> _spawnPoints;
     [SerializeField] private List<Transform> _goalPoints;
     [SerializeField] private Transform _citizenLookAtTarget;
+
 
     [SerializeField] private int _maxSpawnedCitizens = 30;
 
@@ -35,7 +39,7 @@ public class CitizenController : MonoBehaviour
 
     private IEnumerator TimedSpawn()
     {
-        if(_spawnedCitizenCount == 0)
+        if (_spawnedCitizenCount == 0)
         {
             yield return new WaitForSeconds(5f);
         }
@@ -63,17 +67,17 @@ public class CitizenController : MonoBehaviour
     public void SpawnCitizen()
     {
         int randValue = Random.Range(0, _citizenCharacterModelPrefabs.Count);
-        
-        Citizen citizenBase = Instantiate(_citizenBasePrefab, GetRandomSpawnPoint().position, Quaternion.identity);
-        GameObject citizenCharacterModel = Instantiate(_citizenCharacterModelPrefabs[randValue], citizenBase.transform.position, Quaternion.identity, citizenBase.gameObject.transform);
-        citizenBase.SetCitizenVariables(GetCitizenGoalPosition(), _citizenLookAtTarget, false);
-        _spawnedCitizens.Add(citizenBase);
+
+        Citizen citizenBaseGO = Instantiate(_citizenBasePrefab, GetRandomSpawnPoint().position, Quaternion.identity, _citizenHolderObject.transform);
+        Instantiate(_citizenCharacterModelPrefabs[randValue], citizenBaseGO.transform.position, Quaternion.identity, citizenBaseGO.gameObject.transform);
+        citizenBaseGO.SetCitizenVariables(GetCitizenGoalPosition(), _citizenLookAtTarget);
+        _spawnedCitizens.Add(citizenBaseGO);
         _spawnedCitizenCount += 1;
     }
 
     public void CitizenCheer()
     {
-        foreach(Citizen c in _spawnedCitizens)
+        foreach (Citizen c in _spawnedCitizens)
         {
             c.TriggerEndEmote();
         }
