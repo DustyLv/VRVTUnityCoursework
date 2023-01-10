@@ -5,22 +5,20 @@ using Lean.Pool;
 
 public class PresentGenerator : MonoBehaviour
 {
-    [Header("Puke Stuff")]
-    [SerializeField] private KeyCode _pukeKey;
-    [SerializeField] private Transform m_RaycastSourcePosition;
-    [SerializeField] private LayerMask m_LayerMask = -1;
-    [SerializeField] private float m_ActivationDistance = 1f;
+    [Header("General Stuff")]
+    [SerializeField] private KeyCode _presentToggleKey = KeyCode.End;
+    [SerializeField] private bool _presentsEnabledByDefault = true;
 
-    [SerializeField] private Transform _pukeDecalPrefab;
+    [Header("Puke Stuff")]
     [SerializeField] private Vector2 _decalScaleVariance = Vector2.one;
     [SerializeField] private ParticleSystem _pukeParticles;
 
     [SerializeField] private LeanGameObjectPool _vomitPool;
 
     [Header("Poop Stuff")]
-    [SerializeField] private KeyCode _poopKey;
     [SerializeField] private Transform _poopSource;
     [SerializeField] private Rigidbody _poopPrefab;
+    [SerializeField] private Transform _poopHolder;
     [SerializeField] private Vector2 _poopScaleVariance = Vector2.one;
     [SerializeField] private float _poopForce;
     [SerializeField] private Vector2 _poopTimerMinMax = new Vector2(5f,15f);
@@ -33,8 +31,14 @@ public class PresentGenerator : MonoBehaviour
     void Start()
     {
         _sfxPlayer = FindObjectOfType<SFXPlayer>();
-
-        EnablePresents();
+        if (_presentsEnabledByDefault)
+        {
+            EnablePresents();
+        }
+        else
+        {
+            DisablePresents();
+        }
         GameManager.Instance.OnGameEnd += DisablePresents;
         GameManager.Instance.OnGamePause += DisablePresents;
         GameManager.Instance.OnGameResume += EnablePresents;
@@ -42,6 +46,17 @@ public class PresentGenerator : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(_presentToggleKey))
+        {
+            if (_presentGenerationEnabled)
+            {
+                DisablePresents();
+            }
+            else
+            {
+                EnablePresents();
+            }
+        }
         if (!_presentGenerationEnabled) { return; }
         if (Input.GetMouseButtonDown(1) && !_pukeParticles.isEmitting)
         {
@@ -93,7 +108,7 @@ public class PresentGenerator : MonoBehaviour
 
     private void Poop()
     {
-        Rigidbody poopRB = Instantiate(_poopPrefab, _poopSource.position, Quaternion.identity);
+        Rigidbody poopRB = Instantiate(_poopPrefab, _poopSource.position, Quaternion.identity, _poopHolder);
         poopRB.transform.localScale = Vector3.one * Random.Range(_poopScaleVariance.x, _poopScaleVariance.y);
         poopRB.AddForce(_poopSource.forward * _poopForce);
         _sfxPlayer.PlayDogPoopSound();

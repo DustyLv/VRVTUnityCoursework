@@ -59,7 +59,7 @@ public class MainMenuController : MonoBehaviour
     private void SetFullscreenEffect()
     {
         _fullscreenEffectMaterial.SetFloat("_Noise_Opacity", 0.1f);
-        _fullscreenEffectMaterial.SetFloat("_Overlay_Color_Opacity", 0.4f);
+        _fullscreenEffectMaterial.SetFloat("_Overlay_Color_Opacity", 0.2f);
     }
 
     private void ResetFullscreenEffect()
