@@ -11,13 +11,13 @@ Download the latest game build - https://github.com/DustyLv/VRVTUnityCoursework/
 
 # Game Instructions and Features
 
-Use WASD to move
-Use Space to jump
-Use Mouse to look around
-Use Left-click to activate sound sources
-Use Right-click to leave some presents for your owner
+Use WASD to move <br />
+Use Space to jump <br />
+Use Mouse to look around <br />
+Use Left-click to activate sound sources <br />
+Use Right-click to leave some presents for your owner <br />
 
-There are 3 sound/noise sources in the game - your bark, the radio and the car horn.
-To bark, just jump. To activate the radio and horn, click on them with the mouse.
+There are 3 sound/noise sources in the game - your bark, the radio and the car horn. <br />
+To bark, just jump. To activate the radio and horn, click on them with the mouse. <br />
 
 The sound sources increase your gained attention for a limited time and have a cooldown after each use. 
