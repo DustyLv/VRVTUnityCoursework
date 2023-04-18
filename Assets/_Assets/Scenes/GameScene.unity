@@ -5508,15 +5508,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _musicClips:
-  - {fileID: 8300000, guid: af94979bad8aefd4eb0c3da15c0f1c49, type: 3}
-  - {fileID: 8300000, guid: 49e6e94b74837f7488d9d18fb387ee2e, type: 3}
-  - {fileID: 8300000, guid: 338a3ee16066e57469b49d6508a5c9eb, type: 3}
-  - {fileID: 8300000, guid: 3f4657ca96d46ce4c8c111a502c24a76, type: 3}
-  - {fileID: 8300000, guid: 6ee8641a620797f46ba955bb17fd40f7, type: 3}
-  - {fileID: 8300000, guid: 3da72f5233fad91408365ecf176e8e1a, type: 3}
-  - {fileID: 8300000, guid: 8e5846148ef01ac48ae68e535eca273a, type: 3}
-  - {fileID: 8300000, guid: 478f2f924a96ea04983f02e9b299cf1f, type: 3}
-  - {fileID: 8300000, guid: 3e650c1709283eb4b86be6fe184b2212, type: 3}
+  - {fileID: 8300000, guid: 8a473c38ad4e502469946ddb9c44b109, type: 3}
+  - {fileID: 8300000, guid: 6ca55dee3b3428244b89aeb06dd7def2, type: 3}
+  - {fileID: 8300000, guid: 9ef7457bbe5755f47b08d32808e6a77f, type: 3}
+  - {fileID: 8300000, guid: 017b062f928889349b0e46115e16c59c, type: 3}
   _radioClick_On: {fileID: 8300000, guid: 4c8876b0205271f49a6e72a3209f5435, type: 3}
   _radioClick_Off: {fileID: 8300000, guid: 12189c5120b5dfd4980124d57608e9d1, type: 3}
   _audioSource: {fileID: 954567460}
